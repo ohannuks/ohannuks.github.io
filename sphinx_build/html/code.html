@@ -48,8 +48,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="pytools">
-<h1>pytools<a class="headerlink" href="#pytools" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-pytools">
+<span id="pytools"></span><h1>pytools<a class="headerlink" href="#module-pytools" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-vlsvfile">
 <span id="vlsvfile"></span><h2>vlsvfile<a class="headerlink" href="#module-vlsvfile" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -142,7 +142,7 @@
 </div>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><tt class="xref py py-mod docutils literal"><span class="pre">grid</span></tt></p>
+<p class="last"><a class="reference internal" href="#module-grid" title="grid"><tt class="xref py py-mod docutils literal"><span class="pre">grid</span></tt></a></p>
 </div>
 </dd></dl>
 
@@ -494,8 +494,85 @@ Arguments:
 </dd></dl>
 
 </div>
-<div class="section" id="grid">
-<h2>grid<a class="headerlink" href="#grid" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-grid">
+<span id="grid"></span><h2>grid<a class="headerlink" href="#module-grid" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="grid.MayaviGrid">
+<em class="property">class </em><tt class="descclassname">grid.</tt><tt class="descname">MayaviGrid</tt><big>(</big><em>vlsvReader</em>, <em>variable</em>, <em>operator='pass'</em>, <em>threaded=True</em>, <em>**traits</em><big>)</big><a class="headerlink" href="#grid.MayaviGrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">traits.has_traits.HasTraits</span></tt></p>
+<p>This class is used to plot the data in a vlsv file as a mayavi grid The following will bring up a new window and plot the grid in the vlsv file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">grid</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">MayaviGrid</span><span class="p">(</span><span class="n">vlsvReader</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">variable</span><span class="o">=</span><span class="s">&quot;rho&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="s">&#39;pass&#39;</span><span class="p">,</span> <span class="n">threaded</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you have the window open you can use the picker tool in the right-upper corner and use various point-click tools for analyzing data.</p>
+<p>Picker options:</p>
+<p><strong>None</strong> Does nothing upon clicking somewhere in the grid</p>
+<p><strong>Velocity_space</strong> Plots the velocity space at a specific position upon clicking somewhere in the grid Note: If the vlsv file does not have the velocity space at the position where you are clicking, this will not work</p>
+<p><strong>Velocity_space_iso_surface</strong> Plots the velocity space at a specific position upon clicking somewhere in the grid in iso-surface plotting style Note: If the vlsv file does not have the velocity space at the position where you are clicking, this will not work</p>
+<p><strong>Velocity_space_nearest_cellid</strong> Plots the velocity space of the closest cell id to the picking point Note: If the vlsv file does not have velocity space saved at all, this will not work</p>
+<p><strong>Velocity_space_nearest_cellid_iso_surface</strong> Plots the velocity space of the closest cell id to the picking point in iso-surface plotting style Note: If the vlsv file does not have velocity space saved at all, this will not work</p>
+<p><strong>Pitch_angle</strong> Plots the pitch angle distribution at the clicking position Note: If the vlsv file does not have the velocity space at the position where you are clicking, this will not work</p>
+<p><strong>Cut_through</strong> Is used to plot or save the cut-through between two clicking points. This option requires you to use the args section at top-left. To use the args section to plot variables you must write for example: <strong>plot rho B,x E,y</strong> Upon clicking at two points a new window would open with a cut-through plot of rho, x-component of B and y-component of E Alternatively, you can save the cut-through to a variable in the MayaviGrid class by typing instead: <strong>rho B,x E,y</strong> and then going to the terminal and typing</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">cut_through_data</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">cut_through</span>
+<span class="k">print</span> <span class="n">cut_through_data</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="grid.MayaviGrid.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>vlsvReader</em>, <em>variable</em>, <em>operator='pass'</em>, <em>threaded=True</em>, <em>**traits</em><big>)</big><a class="headerlink" href="#grid.MayaviGrid.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the class and loads the mayavi grid</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vlsvReader</strong> (<a class="reference internal" href="#vlsvfile.VlsvReader" title="vlsvfile.VlsvReader"><tt class="xref py py-class docutils literal"><span class="pre">vlsvfile.VlsvReader</span></tt></a>) &#8211; Some vlsv reader with a file open</li>
+<li><strong>variable</strong> &#8211; Name of the variable</li>
+<li><strong>operator</strong> &#8211; Operator for the variable</li>
+<li><strong>threaded</strong> &#8211; Boolean value for using threads or not using threads to draw the grid (threads enable interactive mode)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="grid.MayaviGrid.generate_diff_grid">
+<tt class="descname">generate_diff_grid</tt><big>(</big><em>cellid1</em>, <em>cellid2</em><big>)</big><a class="headerlink" href="#grid.MayaviGrid.generate_diff_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a diff grid of given cell ids (shows avgs diff)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cellid1</strong> &#8211; The first cell id</li>
+<li><strong>cellid2</strong> &#8211; The second cell id</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Example:</span>
+<span class="n">grid</span><span class="o">.</span><span class="n">generate_diff_grid</span><span class="p">(</span> <span class="mi">29219</span><span class="p">,</span> <span class="mi">2910</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the cell id does not have a certain velocity cell, it is assumed that the avgs value of that cell is 0</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="grid.generate_velocity_grid">
+<tt class="descclassname">grid.</tt><tt class="descname">generate_velocity_grid</tt><big>(</big><em>vlsvReader</em>, <em>cellid</em>, <em>iso_surface=False</em><big>)</big><a class="headerlink" href="#grid.generate_velocity_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a velocity grid from a given spatial cell id
+:param cellid:           The spatial cell&#8217;s ID
+:param iso_surface:      If true, plots the iso surface</p>
+</dd></dl>
+
 </div>
 <div class="section" id="calculations">
 <h2>calculations<a class="headerlink" href="#calculations" title="Permalink to this headline">¶</a></h2>
@@ -754,7 +831,7 @@ Variable info is in: data, name, units.</p>
   <ul>
 <li><a class="reference internal" href="#">pytools</a><ul>
 <li><a class="reference internal" href="#module-vlsvfile">vlsvfile</a></li>
-<li><a class="reference internal" href="#grid">grid</a></li>
+<li><a class="reference internal" href="#module-grid">grid</a></li>
 <li><a class="reference internal" href="#calculations">calculations</a></li>
 <li><a class="reference internal" href="#module-plot">plot</a></li>
 </ul>
